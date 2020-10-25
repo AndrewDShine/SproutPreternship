@@ -8,7 +8,13 @@
 #ifndef UNIVERSAL_H_
 #define UNIVERSAL_H_
 
+# include <string>
+
 class Universal {
+private:
+	// twitter members
+	std::string status = NULL;
+	std::string attachment_url = NULL;
 public:
 	Universal();
 	virtual ~Universal();
