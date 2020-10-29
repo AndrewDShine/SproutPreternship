@@ -10,11 +10,22 @@ SRC := src
 OBJ := obj
 EXE := exe
 
-# Command make Universal
+# Command: make Universal
 UniversalObjs := $(OBJ)/main.o $(OBJ)/Universal.o
 
-$(OBJ)/main.o $(SRC)/main.cpp $(INC)/Universal.h
-  $(PP) $(CXXFLAGS) -c $(SRC)/main.cpp
+Universal: $(UniversalObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/Universal $(UniversalObjs)
+	$(EXE)/./Universal
 
-$(OBJ)/Universal.o $(SRC)/main.cpp $(INC)/Universal.h
-  $(PP) $(CXXFLAGS) -c $(SRC)/Universal.cpp
+$(OBJ)/main.o: $(SRC)/main.cpp $(INC)/Universal.h
+	$(PP) $(CXXFLAGS) -c $(SRC)/main.cpp -o $@
+
+$(OBJ)/Universal.o: $(SRC)/Universal.cpp $(INC)/Universal.h
+	$(PP) $(CXXFLAGS) -c $(SRC)/Universal.cpp -o $@
+
+# Command: make initialize
+initialize:
+	mkdir  $(OBJ) $(EXE)
+
+clean:
+	rm -rf *.o $(OBJ)/* $(EXE)/*
