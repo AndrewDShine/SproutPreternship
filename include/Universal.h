@@ -21,7 +21,7 @@ class Universal {
 		// common fields
 		std::string text; // status in Twitter
 		std::string content; // attachment_url in Twitter
-
+		/*
 		// fields specific to Twitter
 		std::string in_reply_to_status_id;
 		bool auto_populate_reply_metadata;
@@ -30,13 +30,14 @@ class Universal {
 		bool possibly_sensitive;
 		double lat;
 		double longitude;
-		std::string place_id;
+		std::sting place_id;
 		bool display_coordinates;
 		bool trim_user;
 		bool enable_dmcommands;
 		bool fail_dmcommands;
 		std::string card_uri;
-
+		*/
+		/*
 		// fields specific to LinkedIn
 		std::string activity; // type is activity URN
 		std::string agent; // type is return
@@ -50,9 +51,11 @@ class Universal {
 		std::string resharedShare; // type is share URN
 		std::string subject;
 		std::string clientApp; // type is URN
+		*/
 
 		// private constructor that will be called in the public member functions
 		Universal();
+		Universal(std::string, std::string);
 
 	public:
 
