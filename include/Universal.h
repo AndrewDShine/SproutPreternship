@@ -2,30 +2,14 @@
  * Universal.h
  *
  *  Created on: Oct 25, 2020
-<<<<<<< HEAD
- *      Author: andre
-=======
  *      Author: Lauren Korbel, Andrew Shine, and Ashley Yeung
  *  This is the header file for the class containing the universal data structure
  *  It will contain the class Universal and its function declarations
->>>>>>> 323556601b2cac2f10d80b8cae50ac9980c06962
  */
 
 #ifndef UNIVERSAL_H_
 #define UNIVERSAL_H_
 
-<<<<<<< HEAD
-# include <string>
-
-class Universal {
-private:
-	// twitter members
-	std::string status = NULL;
-	std::string attachment_url = NULL;
-public:
-	Universal();
-	virtual ~Universal();
-=======
 #include <iostream>
 
 #define COUT std::cout
@@ -77,7 +61,6 @@ class Universal {
 		void post_Twitter();
 
 		void post_LinkedIn();
->>>>>>> 323556601b2cac2f10d80b8cae50ac9980c06962
 };
 
 #endif /* UNIVERSAL_H_ */
