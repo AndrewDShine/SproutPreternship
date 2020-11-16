@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[4]:
 
 
 import tweepy
@@ -34,11 +34,11 @@ class Universal:
                  attachment = None, media = None, sensitivity = False, lat = 27.2046, 
                  long = 77.4977, place = None, display = True, trim = False, 
                  enable = False, fail = True, card = None):
-        self.text = tweet_text
+        self.status = tweet_text
         self.in_reply_to_status_id = reply
         self.auto_populate_reply_metadata = metadata
         self.exclude_reply_user_ids = exclude_reply
-        self.content = attachment
+        self.attachment_url = attachment
         self.media_ids = media
         self.possibly_sensitive = sensitivity
         self.latitude = lat
@@ -56,10 +56,10 @@ class Universal:
                  attachment, media, sensitivity, lat, 
                  long, place, display, trim, 
                  enable, fail): 
-        self.text = tweet_text
+        self.status = tweet_text
         self.in_reply_to_status_id = reply
         self.auto_populate_reply_metadata = metadata
-        self.content = attachment
+        self.attachment_url = attachment
         self.media_ids = media
         self.possibly_sensitive = sensitivity
         self.latitude = lat
@@ -103,5 +103,19 @@ class Universal:
         api = tweepy.API(auth)
     
         # this line actually posts the tweet to Twitter
-        status = api.update_status(status = self.text)
+        status = api.update_status(status = self.status, in_reply_to_status_id = self.in_reply_to_status_id, 
+                                   auto_populate_reply_metadata = self.auto_populate_reply_metadata, 
+                                   exclude_reply_user_ids = self.exclude_reply_user_ids, 
+                                   attachment_url = self.attachment_url, media_ids = self.media_ids, 
+                                   possibly_sensitive = self.possibly_sensitive, place_id = self.place_id, 
+                                   lat = self.latitude, long = self.longitude, 
+                                   display_coordinates = self.display_coordinates, trim_user = self.trim_user, 
+                                   enable_dmcommands = self.enable_dmcommands, 
+                                   fail_dmcommands = self.fail_dmcommands, card_uri = self.card_uri)
+
+
+# In[ ]:
+
+
+
 
