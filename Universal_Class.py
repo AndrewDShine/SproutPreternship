@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[4]:
+# In[6]:
 
 
 import tweepy
@@ -30,9 +30,9 @@ class Universal:
     # constructor for Twitter
     # as of now, user sends in the text for the tweet and can still change any of the other parameters
     # however, each additional parameter already has a default value as seen below
-    def __init__(self, tweet_text = None, reply = None, metadata = True, exclude_reply = True, 
+    def __init__(self, tweet_text = None, reply = None, metadata = True, exclude_reply = None, 
                  attachment = None, media = None, sensitivity = False, lat = 27.2046, 
-                 long = 77.4977, place = None, display = True, trim = False, 
+                 long = 77.4977, place = None, display = False, trim = False, 
                  enable = False, fail = True, card = None):
         self.status = tweet_text
         self.in_reply_to_status_id = reply
@@ -75,7 +75,7 @@ class Universal:
     def interact(self): 
         interact(self.interactive_Tweet, tweet_text = "Enter tweet text here", 
                  reply = "Enter usernames here or leave blank", 
-                metadata = False, attachment = "Enter Twitter url here or leave blank", 
+                metadata = False, attachment = "", 
                  media = "Enter media ids here or leave blank", 
                 sensitivity = False, lat = "Enter coordinate for latitude", 
                  long = "Enter coordinate for longitude", 
@@ -103,7 +103,8 @@ class Universal:
         api = tweepy.API(auth)
     
         # this line actually posts the tweet to Twitter
-        status = api.update_status(status = self.status, in_reply_to_status_id = self.in_reply_to_status_id, 
+        try: 
+            status = api.update_status(status = self.status, in_reply_to_status_id = self.in_reply_to_status_id, 
                                    auto_populate_reply_metadata = self.auto_populate_reply_metadata, 
                                    exclude_reply_user_ids = self.exclude_reply_user_ids, 
                                    attachment_url = self.attachment_url, media_ids = self.media_ids, 
@@ -112,10 +113,14 @@ class Universal:
                                    display_coordinates = self.display_coordinates, trim_user = self.trim_user, 
                                    enable_dmcommands = self.enable_dmcommands, 
                                    fail_dmcommands = self.fail_dmcommands, card_uri = self.card_uri)
-
-
-# In[ ]:
-
-
-
+        except: 
+            status = api.update_status(status = self.status, in_reply_to_status_id = self.in_reply_to_status_id, 
+                                   auto_populate_reply_metadata = self.auto_populate_reply_metadata, 
+                                   exclude_reply_user_ids = self.exclude_reply_user_ids, 
+                                   media_ids = self.media_ids, 
+                                   possibly_sensitive = self.possibly_sensitive, place_id = self.place_id, 
+                                   lat = self.latitude, long = self.longitude, 
+                                   display_coordinates = self.display_coordinates, trim_user = self.trim_user, 
+                                   enable_dmcommands = self.enable_dmcommands, 
+                                   fail_dmcommands = self.fail_dmcommands, card_uri = self.card_uri)
 
