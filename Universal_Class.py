@@ -10,7 +10,7 @@ from ipywidgets import interact
 
 class Universal:
     
-    # fields specific to posting on Twitter
+    # Fields specific to posting on Twitter
     status = ""
     in_reply_to_status_id = ""
     auto_populate_reply_metadata = ""
@@ -19,17 +19,17 @@ class Universal:
     media_ids = ""
     possibly_sensitive = ""
     place_id = ""
-    latitude = ""
-    longitude = ""
+    latitude = 0
+    longitude = 0
     display_coordinates = ""
     trim_user = ""
     enable_dmcommands = ""
     fail_dmcommands = ""
     card_uri = ""
     
-    # constructor for Twitter
-    # as of now, user sends in the text for the tweet and can still change any of the other parameters
-    # however, each additional parameter already has a default value as seen below
+    # Constructor for Twitter
+    # As of now, user sends in the text for the tweet and can still change any of the other parameters
+    # However, each additional parameter already has a default value as seen below
     def __init__(self, tweet_text = None, reply = None, metadata = True, exclude_reply = None, 
                  attachment = None, media = None, sensitivity = False, lat = 27.2046, 
                  long = 77.4977, place = None, display = False, trim = False, 
@@ -50,8 +50,8 @@ class Universal:
         self.fail_dmcommands = fail
         self.card_uri = card
     
-    # this function is able to change the fields of the class based on user input
-    # it is the equivalent of a .set method
+    # This function is able to change the fields of the class based on user input
+    # It is the equivalent of a .set method
     def interactive_Tweet(self, tweet_text, reply, metadata, 
                  attachment, media, sensitivity, lat, 
                  long, place, display, trim, 
@@ -70,19 +70,19 @@ class Universal:
         self.enable_dmcommands = enable
         self.fail_dmcommands = fail
         
-    # this function calls the interact method on the interactive_Tweet method
-    # it allows the user to input information to change the fields in the class
+    # This function calls the interact method on the interactive_Tweet method
+    # It allows the user to input information to change the fields in the class
     def interact(self): 
         interact(self.interactive_Tweet, tweet_text = "Enter tweet text here", 
                  reply = "Enter usernames here or leave blank", 
                 metadata = False, attachment = "", 
                  media = "Enter media ids here or leave blank", 
-                sensitivity = False, lat = "Enter coordinate for latitude", 
-                 long = "Enter coordinate for longitude", 
+                sensitivity = False, lat = (-90, 90, 1), 
+                 long = (-180, 180, 1), 
                 place = "Enter place id (number) or leave blank", display = True, trim = False, 
                 enable = False, fail = True)
         
-    # this function is used to interact with the Twitter API and post a tweet
+    # This function is used to interact with the Twitter API and post a tweet
     def post_to_Twitter(self, user):
         # Twitter login credentials needed for user authentication
         # there are currently two accounts that this program can post to
@@ -102,7 +102,10 @@ class Universal:
         auth.set_access_token(access_token[user], access_token_secret[user])
         api = tweepy.API(auth)
     
-        # this line actually posts the tweet to Twitter
+        # This line actually posts the tweet to Twitter
+        # Try / except block is to account for if the attachment_url argument is empty
+        # Originally, there was an error (code 44: attachment_url is invalid) since attachment_url
+        # has to be a permalink to a Tweet or a DM
         try: 
             status = api.update_status(status = self.status, in_reply_to_status_id = self.in_reply_to_status_id, 
                                    auto_populate_reply_metadata = self.auto_populate_reply_metadata, 
